@@ -1,4 +1,51 @@
-# Stable Diffusion web UI
+# Huiyoujia-AI.com
+
+## Prerequisites
+
+- AWS account with the permission to create and manage EC2 instances. 
+- Access to creating EC2 instances that uses the g4dn.xlarge gpu
+- WSL installed to SSH into the EC2 instances
+
+## Step 1: Deploy EC2 Instance
+1. Open the AWS Management Console, navigate to the EC2 dashboard, and select launch new instance
+2. Choose Ubuntu (best to use Deep Learning AMI GPU Pytorch) as the AMI
+3. Select the Instance type (g4dn.xlarge)
+4. Select or create a new key pair (save the key pair if it is not automatically saved)
+5. Adjust Network settings
+6. Configure storage (at the moment used 200GB of GP3 Root volume)
+7. Click Launch Instance at the bottom
+    
+## Step 2: SSH Into the EC2
+1. After the EC2 instance has been deployed, open the instance summary page and find the public ipv4 dns address
+2. Open a terminal and enter WSL or other Ubuntu command line
+3. Copy the saved key-pair file to WSL root by running ```mkdir aws_key``` followed by ```cp /mnt/path/to/file/key-pair.pem aws_key/key-pair.pem```
+4. Run the following commands to make sure your environment is up to date ```sudo apt-get update && sudo apt-get upgrade```
+5. Encrypt the key-pair file to meet AWS requriements using this command ```chmod 400 aws_key/key-pair.pem```
+6. SSH into the EC2 using ```ssh -i aws_key/key-pair.pem ubuntu@ec2-public-ipv4-dns```, replace "ec2-public-ipv4-dns" with the value found on the instance summary page
+7. after entering the EC2 via SSH, run ```sudo apt-get update && sudo apt-get upgrade``` and check if other packages are updated/present
+
+## Step 3: Setting up Stable Diffusion WebUI
+1. (Optional) Make a new folder by using ```mkdir genAI```
+2. Clone the Stable Diffusion WebUI git (or clone modified git) via ```git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui``` or other command
+3. Navigate to stable-diffusion-webui/models/Stable-diffusion folder
+4. Transfer the needed model files via S3, use ```aws s3 cp s3://sd-bucket/chilloutmix_NiPrunedFp32Fix.safetensors .```, replace sd-bucket with the name of the bucket and the path to the file
+5. Return to the root of the stable-diffusion-webui
+6. (Optional) launch tmux session manager by using the command ```tmux```
+7. Launch the web ui using ```./webui.sh --share```, add --share to create a gradle link that is public for 72 hours
+7. Or launch the web ui using ```./webui.sh --listen --xformers --tls-keyfile huiyoujia-ai.key --tls-certfile huiyoujia-ai.crt --disable-tls-verify```
+
+8. After done with the service, be sure to either stop the instance via the AWS Management Console, or to terminate in the command line to take down the gradle link
+
+## Setting up ControlNet
+1. Navigate in command line to stable-diffusion-webui/extensions
+2. Clone the Control Net extension by ```git clone https://github.com/Mikubill/sd-webui-controlnet```
+3. Navigate to stable-diffusion-webui/extensions/sd-webui-controlnet/models
+4. Transfer the needed control net model files via S3, use ```aws s3 cp s3://sd-bucket/control-net-models/model-name.pth .```
+5. Relaunch the WebUI if it was already running
+
+
+
+## Stable Diffusion web UI
 A browser interface based on Gradio library for Stable Diffusion.
 
 ![](screenshot.png)
