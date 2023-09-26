@@ -1264,7 +1264,7 @@ def create_ui():
     for _interface, label, _ifid in interfaces:
         shared.tab_names.append(label)
 
-    with gr.Blocks(theme=shared.gradio_theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-color: red}") as demo:
+    with gr.Blocks(theme=shared.gradio_theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-image: linear-gradient(to bottom, #fbfbe0, #fbfce5, #fbfde9, #fbfeee, #fcfff2);}") as demo:
         settings.add_quicksettings()
 
         parameters_copypaste.connect_paste_params_buttons()
