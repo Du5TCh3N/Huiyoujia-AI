@@ -7,6 +7,8 @@ from modules import timer
 from modules import initialize_util
 from modules import initialize
 
+from authing import AuthenticationClient, AuthingException
+
 startup_timer = timer.startup_timer
 startup_timer.record("launcher")
 
@@ -79,6 +81,31 @@ def webui():
         def same_auth(username, password):
             return username == password
 
+        def test_authing(username, password):
+            # Initialize Authing SDK with your UserPool ID.
+            authentication_client = AuthenticationClient(
+                app_id='65119ce072faf6134a642df7',
+                app_host='https://huiyoujia-ai.authing.cn/',
+                app_secret='c8bcebc96c93f92dd7fdd50908b549b2',
+                protocol='oidc'
+            )
+
+            authentication_client.build_authorize_url; # Texture front end login link
+            authentication_client.build_logout_url; # Texture front end logout link
+            authentication_client.get_access_token_by_code; # Code exchange Token
+            authentication_client.get_access_token_by_client_credentials; # Machine license Access Token
+            authentication_client.get_user_info_by_access_token; # Token Change user information
+            authentication_client.get_new_access_token_by_refresh_token; # Refresh Token
+            authentication_client.introspect_token; # Test Token legality
+            authentication_client.revoke_token; # withdraw Token
+            authentication_client.validate_ticket_v1; # test CAS 1.0 ticket
+
+            username = str("gzchen1025@gmail.com")
+            password = str("1234")
+            user = authentication_client.sign_in_by_email_password(username,password)
+            
+            return user['statusCode'] == 200
+
         app, local_url, share_url = shared.demo.launch(
             share=cmd_opts.share,
             server_name=initialize_util.gradio_server_name(),
@@ -96,7 +123,7 @@ def webui():
                 "redoc_url": "/redoc",
             },
             root_path=f"/{cmd_opts.subpath}" if cmd_opts.subpath else "",
-            auth=same_auth,
+            auth=test_authing,
         )
 
         startup_timer.record("gradio launch")

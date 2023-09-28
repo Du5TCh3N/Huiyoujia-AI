@@ -1271,11 +1271,13 @@ def create_ui():
         body_background_fill='#505a5b',
         body_background_fill_dark='#505a5b',
         body_text_color='#99d0d4',
+        body_text_color_subdued='#99d0d4',
         background_fill_primary='#505a5b',
         background_fill_secondary='#505a5b',
         block_background_fill='#505a5b',
         block_background_fill_dark='#505a5bg',
         block_label_background_fill='#505a5b',
+        block_title_text_color='#99d0d4',
         panel_background_fill='#505a5b',
         panel_border_color='#94d3d0',
         panel_border_width='1px',
@@ -1326,9 +1328,9 @@ def create_ui():
         if os.path.exists(os.path.join(script_path, "notification.mp3")):
             gr.Audio(interactive=False, value=os.path.join(script_path, "notification.mp3"), elem_id="audio_notification", visible=False)
 
-        footer = shared.html("footer.html")
-        footer = footer.format(versions=versions_html(), api_docs="/docs" if shared.cmd_opts.api else "https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/API")
-        gr.HTML(footer, elem_id="footer")
+        # footer = shared.html("footer.html")
+        # footer = footer.format(versions=versions_html(), api_docs="/docs" if shared.cmd_opts.api else "https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/API")
+        # gr.HTML(footer, elem_id="footer")
 
         settings.add_functionality(demo)
 
