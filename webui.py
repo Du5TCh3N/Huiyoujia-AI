@@ -76,6 +76,9 @@ def webui():
             elif shared.opts.auto_launch_browser == "Local":
                 auto_launch_browser = not any([cmd_opts.listen, cmd_opts.share, cmd_opts.ngrok, cmd_opts.server_name])
 
+        def same_auth(username, password):
+            return username == password
+
         app, local_url, share_url = shared.demo.launch(
             share=cmd_opts.share,
             server_name=initialize_util.gradio_server_name(),
@@ -84,7 +87,7 @@ def webui():
             ssl_certfile=cmd_opts.tls_certfile,
             ssl_verify=cmd_opts.disable_tls_verify,
             debug=cmd_opts.gradio_debug,
-            auth=gradio_auth_creds,
+            # auth=gradio_auth_creds,
             inbrowser=auto_launch_browser,
             prevent_thread_lock=True,
             allowed_paths=cmd_opts.gradio_allowed_path,
@@ -93,6 +96,7 @@ def webui():
                 "redoc_url": "/redoc",
             },
             root_path=f"/{cmd_opts.subpath}" if cmd_opts.subpath else "",
+            auth=same_auth,
         )
 
         startup_timer.record("gradio launch")
