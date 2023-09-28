@@ -1264,7 +1264,44 @@ def create_ui():
     for _interface, label, _ifid in interfaces:
         shared.tab_names.append(label)
 
-    with gr.Blocks(theme=shared.gradio_theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-image: linear-gradient(to bottom, #fbfbe0, #fbfce5, #fbfde9, #fbfeee, #fcfff2);}") as demo:
+    theme = gr.themes.Base(
+        primary_hue="cyan",
+        secondary_hue="cyan",
+    ).set(
+        body_background_fill='#505a5b',
+        body_background_fill_dark='#505a5b',
+        body_text_color='#99d0d4',
+        background_fill_primary='#505a5b',
+        background_fill_secondary='#505a5b',
+        block_background_fill='#505a5b',
+        block_background_fill_dark='#505a5bg',
+        block_label_background_fill='#505a5b',
+        panel_background_fill='#505a5b',
+        panel_border_color='#94d3d0',
+        panel_border_width='1px',
+        checkbox_background_color='#99d0d4',
+        checkbox_background_color_focus_dark='#99d0d4',
+        checkbox_background_color_selected='#99d0d4',
+        checkbox_border_color='#99d0d4',
+        checkbox_shadow='#99d0d4',
+        checkbox_label_background_fill='#505a5b',
+        input_background_fill='#505a5b',
+        input_border_color='#94d3d0',
+        input_border_width='1px',
+        slider_color='#99d0d4',
+        slider_color_dark='#99d0d4',
+        stat_background_fill='#505a5b',
+        button_border_width='2px',
+        button_primary_background_fill='#505a5b',
+        button_primary_background_fill_dark='#505a5b',
+        button_primary_border_color='#99d0d4',
+        button_primary_text_color='#99d0d4',
+        button_secondary_background_fill='#505a5b',
+        button_secondary_border_color='#99d0d4',
+        button_secondary_text_color='#99d0d4',
+    )
+
+    with gr.Blocks(theme=theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-color: #272C2F}") as demo:
         settings.add_quicksettings()
 
         parameters_copypaste.connect_paste_params_buttons()

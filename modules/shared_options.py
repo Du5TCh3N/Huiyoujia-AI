@@ -264,7 +264,19 @@ options_templates.update(options_section(('ui', "User interface"), {
     "hires_fix_show_sampler": OptionInfo(False, "Hires fix: show hires checkpoint and sampler selection").needs_reload_ui(),
     "hires_fix_show_prompts": OptionInfo(False, "Hires fix: show hires prompt and negative prompt").needs_reload_ui(),
     "disable_token_counters": OptionInfo(False, "Disable prompt token counters").needs_reload_ui(),
-    "logo": OptionHTML("""<h1>绘有家-AI</h1>"""),
+    "logo": OptionHTML("""
+    <style>
+        .gradient-text {
+            background: linear-gradient(45deg, #f9caee, #d3d7dc, #c5ecb3, #f4e89c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline;
+        }
+    </style>
+    <h1><span class="gradient-text">绘有家-AI</span></h1>
+"""),
+
 }))
 
 
