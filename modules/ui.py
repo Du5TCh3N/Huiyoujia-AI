@@ -1357,7 +1357,10 @@ def create_ui():
         button_secondary_background_fill_hover_dark='#505a5b',
         button_secondary_border_color='#505a5b',
         button_secondary_border_color_dark='#505a5b',
-        button_secondary_text_color='#505a5b'
+        button_secondary_text_color='#99d0d4',
+        button_secondary_text_color_dark="99d0d4",
+        button_secondary_text_color_hover='#99d0d4',
+        button_secondary_text_color_hover_dark="99d0d4",
     )
 
     with gr.Blocks(theme=theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-color: #505a5b}") as demo:
