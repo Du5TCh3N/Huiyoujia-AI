@@ -1331,6 +1331,8 @@ def create_ui():
         checkbox_label_text_color='#505a5b',
         input_background_fill='#505a5b',
         input_background_fill_hover='#505a5b',
+        input_background_fill_dark="#505a5b",
+        input_background_fill_hover_dark='#505a5b',
         input_border_color='#99d0d4',
         input_border_width='1px',
         input_placeholder_color='#95afb2',
@@ -1358,7 +1360,7 @@ def create_ui():
         button_secondary_text_color='#505a5b'
     )
 
-    with gr.Blocks(theme=theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-color: #272C2F}") as demo:
+    with gr.Blocks(theme=theme, analytics_enabled=False, title="绘有家-AI", css=".gradio-container {background-color: #505a5b}") as demo:
         settings.add_quicksettings()
 
         parameters_copypaste.connect_paste_params_buttons()
