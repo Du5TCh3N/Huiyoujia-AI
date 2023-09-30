@@ -120,6 +120,7 @@ def webui():
             },
             root_path=f"/{cmd_opts.subpath}" if cmd_opts.subpath else "",
             auth=test_authing,
+            auth_message="请前往 https://huiyoujia-ai.authing.cn 注册账户"
         )
 
         startup_timer.record("gradio launch")
