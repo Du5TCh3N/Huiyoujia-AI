@@ -305,7 +305,7 @@ class ControlNetUiGroup(object):
             with gr.Row(elem_classes=["controlnet_control_type", "controlnet_row"]):
                 self.type_filter = gr.Radio(
                     list(preprocessor_filters.keys()),
-                    label=f"参考 条件 Control Type",
+                    label=f"参考条件 Control Type",
                     value="All",
                     elem_id=f"{elem_id_tabname}_{tabname}_controlnet_type_filter_radio",
                     elem_classes="controlnet_control_type_filter_group",
@@ -314,7 +314,7 @@ class ControlNetUiGroup(object):
         with gr.Row(elem_classes=["controlnet_preprocessor_model", "controlnet_row"]):
             self.module = gr.Dropdown(
                 global_state.ui_preprocessor_keys,
-                label=f"Preprocessor",
+                label=f"预处理 Preprocessor",
                 value=self.default_unit.module,
                 elem_id=f"{elem_id_tabname}_{tabname}_controlnet_preprocessor_dropdown",
             )
@@ -326,7 +326,7 @@ class ControlNetUiGroup(object):
             )
             self.model = gr.Dropdown(
                 list(global_state.cn_models.keys()),
-                label=f"Model",
+                label=f"处理模型 Model",
                 value=self.default_unit.model,
                 elem_id=f"{elem_id_tabname}_{tabname}_controlnet_model_dropdown",
             )
@@ -397,7 +397,7 @@ class ControlNetUiGroup(object):
         self.control_mode = gr.Radio(
             choices=[e.value for e in external_code.ControlMode],
             value=self.default_unit.control_mode.value,
-            label="Control Mode",
+            label="参考模式 Control Mode",
             elem_id=f"{elem_id_tabname}_{tabname}_controlnet_control_mode_radio",
             elem_classes="controlnet_control_mode_radio",
         )
