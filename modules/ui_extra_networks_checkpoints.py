@@ -8,7 +8,7 @@ from modules.ui_extra_networks_checkpoints_user_metadata import CheckpointUserMe
 
 class ExtraNetworksPageCheckpoints(ui_extra_networks.ExtraNetworksPage):
     def __init__(self):
-        super().__init__('Checkpoints')
+        super().__init__('模型 Checkpoints')
 
     def refresh(self):
         shared.refresh_checkpoints()

@@ -27,7 +27,7 @@ notification.mp3
 /SwinIR
 /textual_inversion
 .vscode
-/extensions
+/extensions/sd-webui-controlnet-main/models
 /test/stdout.txt
 /test/stderr.txt
 /cache.json*
