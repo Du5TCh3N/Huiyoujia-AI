@@ -181,13 +181,13 @@ class Toprow:
                 with gr.Row():
                     with gr.Column(scale=80):
                         with gr.Row():
-                            self.prompt = gr.Textbox(label="Prompt", elem_id=f"{id_part}_prompt", show_label=False, lines=3, placeholder="Prompt (press Ctrl+Enter or Alt+Enter to generate)", elem_classes=["prompt"])
+                            self.prompt = gr.Textbox(label="请输入生成文案 Prompt", elem_id=f"{id_part}_prompt", show_label=False, lines=3, placeholder="请输入生成文案 Prompt (press Ctrl+Enter or Alt+Enter to generate)", elem_classes=["prompt"])
                             self.prompt_img = gr.File(label="", elem_id=f"{id_part}_prompt_image", file_count="single", type="binary", visible=False)
 
                 with gr.Row():
                     with gr.Column(scale=80):
                         with gr.Row():
-                            self.negative_prompt = gr.Textbox(label="Negative prompt", elem_id=f"{id_part}_neg_prompt", show_label=False, lines=3, placeholder="Negative prompt (press Ctrl+Enter or Alt+Enter to generate)", elem_classes=["prompt"])
+                            self.negative_prompt = gr.Textbox(label="请输入负向词 Negative prompt", elem_id=f"{id_part}_neg_prompt", show_label=False, lines=3, placeholder="请输入负向词 Negative prompt (press Ctrl+Enter or Alt+Enter to generate)", elem_classes=["prompt"])
 
             self.button_interrogate = None
             self.button_deepbooru = None
@@ -285,7 +285,7 @@ def create_output_panel(tabname, outdir):
 def create_sampler_and_steps_selection(choices, tabname):
     if opts.samplers_in_dropdown:
         with FormRow(elem_id=f"sampler_selection_{tabname}"):
-            sampler_name = gr.Dropdown(label='Sampling method', elem_id=f"{tabname}_sampling", choices=choices, value=choices[0])
+            sampler_name = gr.Dropdown(label='采样模式 Sampling method', elem_id=f"{tabname}_sampling", choices=choices, value=choices[0])
             steps = gr.Slider(minimum=1, maximum=20, step=1, elem_id=f"{tabname}_steps", label="Sampling steps", value=20, visible=False)
     else:
         with FormGroup(elem_id=f"sampler_selection_{tabname}"):
@@ -333,7 +333,7 @@ def create_ui():
         extra_tabs = gr.Tabs(elem_id="txt2img_extra_tabs")
         extra_tabs.__enter__()
 
-        with gr.Tab("Generation", id="txt2img_generation") as txt2img_generation_tab, ResizeHandleRow(equal_height=False):
+        with gr.Tab("生成 Generation", id="txt2img_generation") as txt2img_generation_tab, ResizeHandleRow(equal_height=False):
             with gr.Column(variant='compact', elem_id="txt2img_settings"):
                 scripts.scripts_txt2img.prepare_ui()
 
@@ -344,16 +344,16 @@ def create_ui():
                     elif category == "dimensions":
                         with FormRow():
                             with gr.Column(elem_id="txt2img_column_size", scale=4):
-                                width = gr.Slider(minimum=64, maximum=1024, step=8, label="Width", value=512, elem_id="txt2img_width")
-                                height = gr.Slider(minimum=64, maximum=1024, step=8, label="Height", value=512, elem_id="txt2img_height")
+                                width = gr.Slider(minimum=64, maximum=1024, step=8, label="宽 Width", value=512, elem_id="txt2img_width")
+                                height = gr.Slider(minimum=64, maximum=1024, step=8, label="高 Height", value=512, elem_id="txt2img_height")
 
                             with gr.Column(elem_id="txt2img_dimensions_row", scale=1, elem_classes="dimensions-tools"):
                                 res_switch_btn = ToolButton(value=switch_values_symbol, elem_id="txt2img_res_switch_btn", label="Switch dims")
 
                             if opts.dimensions_and_batch_together:
                                 with gr.Column(elem_id="txt2img_column_batch", visible=False):
-                                    batch_count = gr.Slider(minimum=1, step=1, label='Batch count', value=1, elem_id="txt2img_batch_count")
-                                    batch_size = gr.Slider(minimum=1, maximum=8, step=1, label='Batch size', value=1, elem_id="txt2img_batch_size")
+                                    batch_count = gr.Slider(minimum=1, step=1, label='出图次数 Batch count', value=1, elem_id="txt2img_batch_count")
+                                    batch_size = gr.Slider(minimum=1, maximum=8, step=1, label='出图张数 Batch size', value=1, elem_id="txt2img_batch_size")
 
                     elif category == "cfg":
                         with gr.Row():
@@ -365,14 +365,14 @@ def create_ui():
 
                     elif category == "accordions":
                         with gr.Row(elem_id="txt2img_accordions", elem_classes="accordions"):
-                            with InputAccordion(False, label="Hires. fix", elem_id="txt2img_hr") as enable_hr:
+                            with InputAccordion(False, label="高清精绘 Hires. fix", elem_id="txt2img_hr") as enable_hr:
                                 with enable_hr.extra():
-                                    hr_final_resolution = FormHTML(value="", elem_id="txtimg_hr_finalres", label="Upscaled resolution", interactive=False, min_width=0)
+                                    hr_final_resolution = FormHTML(value="", elem_id="txtimg_hr_finalres", label="精绘分辨率 Upscaled resolution", interactive=False, min_width=0)
 
                                 with FormRow(elem_id="txt2img_hires_fix_row1", variant="compact"):
-                                    hr_upscaler = gr.Dropdown(label="Upscaler", elem_id="txt2img_hr_upscaler", choices=[*shared.latent_upscale_modes, *[x.name for x in shared.sd_upscalers]], value=shared.latent_upscale_default_mode)
-                                    hr_second_pass_steps = gr.Slider(minimum=0, maximum=150, step=1, label='Hires steps', value=0, elem_id="txt2img_hires_steps")
-                                    denoising_strength = gr.Slider(minimum=0.0, maximum=1.0, step=0.01, label='Denoising strength', value=0.7, elem_id="txt2img_denoising_strength")
+                                    hr_upscaler = gr.Dropdown(label="精绘方式 Upscaler", elem_id="txt2img_hr_upscaler", choices=[*shared.latent_upscale_modes, *[x.name for x in shared.sd_upscalers]], value=shared.latent_upscale_default_mode)
+                                    hr_second_pass_steps = gr.Slider(minimum=0, maximum=150, step=1, label='精绘步数 Hires steps', value=0, elem_id="txt2img_hires_steps")
+                                    denoising_strength = gr.Slider(minimum=0.0, maximum=1.0, step=0.01, label='去噪强度 Denoising strength', value=0.7, elem_id="txt2img_denoising_strength")
 
                                 with FormRow(elem_id="txt2img_hires_fix_row2", variant="compact"):
                                     hr_scale = gr.Slider(minimum=1.0, maximum=4.0, step=0.05, label="Upscale by", value=2.0, elem_id="txt2img_hr_scale")
@@ -1246,19 +1246,19 @@ def create_ui():
     settings.create_ui(loadsave, dummy_component)
 
     interfaces = [
-        (txt2img_interface, "txt2img", "txt2img"),
-        (img2img_interface, "img2img", "img2img"),
-        (extras_interface, "Extras", "extras"),
-        (pnginfo_interface, "PNG Info", "pnginfo"),
-        (modelmerger_ui.blocks, "Checkpoint Merger", "modelmerger"),
-        (train_interface, "Train", "train"),
+        (txt2img_interface, "文生图 txt2img", "txt2img"),
+        (img2img_interface, "图生图 img2img", "img2img"),
+        (extras_interface, "后期处理 Extras", "extras"),
+        (pnginfo_interface, "图片信息 PNG Info", "pnginfo"),
+        (modelmerger_ui.blocks, "模型融合 Checkpoint Merger", "modelmerger"),
+        (train_interface, "训练 Train", "train"),
     ]
 
     interfaces += script_callbacks.ui_tabs_callback()
-    interfaces += [(settings.interface, "Settings", "settings")]
+    interfaces += [(settings.interface, "系统信息 Settings", "settings")]
 
-    extensions_interface = ui_extensions.create_ui()
-    interfaces += [(extensions_interface, "Extensions", "extensions")]
+    # extensions_interface = ui_extensions.create_ui()
+    # interfaces += [(extensions_interface, "Extensions", "extensions")]
 
     shared.tab_names = []
     for _interface, label, _ifid in interfaces:
