@@ -200,7 +200,7 @@ class Toprow:
                 with gr.Row(elem_id=f"{id_part}_generate_box", elem_classes="generate-box"):
                     self.interrupt = gr.Button('Interrupt', elem_id=f"{id_part}_interrupt", elem_classes="generate-box-interrupt")
                     self.skip = gr.Button('Skip', elem_id=f"{id_part}_skip", elem_classes="generate-box-skip")
-                    self.submit = gr.Button('Generate', elem_id=f"{id_part}_generate", variant='primary')
+                    self.submit = gr.Button('生成 Generate', elem_id=f"{id_part}_generate", variant='primary')
 
                     self.skip.click(
                         fn=lambda: shared.state.skip(),
@@ -344,8 +344,8 @@ def create_ui():
                     elif category == "dimensions":
                         with FormRow():
                             with gr.Column(elem_id="txt2img_column_size", scale=4):
-                                width = gr.Slider(minimum=64, maximum=1024, step=8, label="宽 Width", value=512, elem_id="txt2img_width")
-                                height = gr.Slider(minimum=64, maximum=1024, step=8, label="高 Height", value=512, elem_id="txt2img_height")
+                                width = gr.Slider(minimum=64, maximum=800, step=8, label="宽 Width", value=512, elem_id="txt2img_width")
+                                height = gr.Slider(minimum=64, maximum=800, step=8, label="高 Height", value=512, elem_id="txt2img_height")
 
                             with gr.Column(elem_id="txt2img_dimensions_row", scale=1, elem_classes="dimensions-tools"):
                                 res_switch_btn = ToolButton(value=switch_values_symbol, elem_id="txt2img_res_switch_btn", label="Switch dims")
